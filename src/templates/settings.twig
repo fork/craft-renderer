@@ -1,0 +1,40 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * Renderer plugin for Craft CMS 3.x
+ *
+ * Renderer Settings.twig
+ *
+ * @author    Fork Unstable Media GmbH
+ * @copyright Copyright (c) 2018 Fork Unstable Media GmbH
+ * @link      http://fork.de
+ * @package   Renderer
+ * @since     1.0.0
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+{{ forms.editableTableField({
+    label: 'Pattern Lib Urls',
+    instructions: 'The urls to the Pattern Lib Components renderer (e.g. http://frontend:5000/components/ if you use it on your local machine)',
+    id: 'patternLibUrls',
+    name: 'patternLibUrls',
+    cols: [
+        {
+            heading : 'Environment',
+            type: 'select',
+            options: [
+            {label: 'dev', value: 'dev'},
+            {label: 'staging', value: 'staging'},
+            {label: 'production', value: 'production'},
+        ]
+        },
+        {
+            heading : 'Url',
+            type: 'singleline'
+        },
+    ],
+    rows: settings.patternLibUrls,
+    required: true
+}) }}
