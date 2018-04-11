@@ -16,11 +16,15 @@ To install the plugin, follow these instructions.
 
         cd /path/to/project
 
-2. Then tell Composer to load the plugin:
+2. Then tell Composer to use the repository:
 
-        composer require fork/renderer
+        [make] composer config repositories.renderer vcs https://lab.fork.de/craft-plugins/renderer.git
 
-3. In the Control Panel, go to Settings → Plugins and click the “Install” button for Renderer.
+3. Then tell Composer to load the plugin:
+
+        [make] composer require fork/renderer
+
+4. In the Control Panel, go to Settings → Plugins and click the “Install” button for Renderer.
 
 ## Renderer Overview
 
