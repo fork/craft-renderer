@@ -2,7 +2,7 @@
     "name": "fork/renderer",
     "description": "Render html content from the fork ui pattern lib within templates (via json POST request)",
     "type": "craft-plugin",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "keywords": [
         "craft",
         "cms",
@@ -11,8 +11,8 @@
         "renderer"
     ],
     "support": {
-        "docs": "https://github.com/fork/renderer/blob/master/README.md",
-        "issues": "https://github.com/fork/renderer/issues"
+        "docs": "https://github.com/fork/craft-renderer/blob/master/README.md",
+        "issues": "https://github.com/fork/craft-renderer/issues"
     },
     "license": "MIT",
     "authors": [
@@ -34,7 +34,7 @@
         "handle": "renderer",
         "hasCpSettings": true,
         "hasCpSection": false,
-        "changelogUrl": "https://raw.githubusercontent.com/fork/renderer/master/CHANGELOG.md",
+        "changelogUrl": "https://raw.githubusercontent.com/fork/craft-renderer/master/CHANGELOG.md",
         "components": {
             "render": "fork\\renderer\\services\\Render"
         },

@@ -75,8 +75,10 @@ Here is an example on how to use renderer in your templates:
 
 {% endfor %}
 ```
-
-
+It also provides a dump method to retrieve a prettified json representation to use/copy within the pattern library:
+```
+{{ craft.renderer.dump(data) }}
+```
 
 ## Renderer Roadmap
 

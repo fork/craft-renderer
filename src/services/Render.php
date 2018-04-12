@@ -50,10 +50,8 @@ class Render extends Component
             $template = $data['type'];
         }
 
-        // if data is no array but e.g. an matrix block, get its fields
-        if ($data instanceof Element) {
-            $data = $data->getFieldValues();
-        }
+        // extract data
+        $data = $this->getData($data);
 
         // get the patter lib url from settings (depending on craft environment)
         $env = Craft::$app->config->env;
@@ -78,5 +76,33 @@ class Render extends Component
             Craft::error($e->getMessage(), 'renderer');
             return '';
         }
+    }
+
+    /**
+     * Get a prettyfied json representation of the data to use/copy paste into the pattern library for frontend development
+     *
+     * @param $data
+     * @return string
+     */
+    public function dump($data) {
+        // extract data
+        $data = $this->getData($data);
+
+        return json_encode($data, JSON_PRETTY_PRINT);
+    }
+
+    /**
+     * Data extraction (e.g. get fields from module)
+     *
+     * @param $data
+     * @return array
+     */
+    private function getData($data) {
+        // if data is no array but e.g. an matrix block, get its fields
+        if ($data instanceof Element) {
+            $data = $data->getFieldValues();
+        }
+
+        return $data;
     }
 }

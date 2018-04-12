@@ -50,4 +50,17 @@ class RendererVariable
     {
         return Template::raw(Renderer::$plugin->render->render($data, $componentType, $template));
     }
+
+    /**
+     * Dump a prettyfied json representation of the data to use/copy paste into the pattern library for frontend development
+     *
+     *     {{ craft.renderer.dump($data) }}
+     *
+     * @param $data
+     * @return string
+     */
+    public function dump($data)
+    {
+        return Template::raw('<pre>' . Renderer::$plugin->render->dump($data) . '</pre>');
+    }
 }
