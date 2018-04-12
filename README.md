@@ -33,7 +33,7 @@ To install the plugin, follow these instructions.
 
 2. Then tell Composer to use the repository:
 
-        [make] composer config repositories.renderer vcs https://lab.fork.de/craft-plugins/renderer.git
+        [make] composer config repositories.renderer vcs git@github.com:fork/craft-renderer.git
 
 3. Then tell Composer to load the plugin:
 
@@ -50,7 +50,7 @@ These could be implemented in Craft as Matrix Blocks for example, but any data c
 ## Configuring Renderer
 
 Go to the Plugin settings (http://mysite.com/admin/settings/plugins/renderer) and define the Urls to the Pattern Library (based on craft environment).
-For "dev", if you use the given docker example this would be http://frontend:5000/components/`.
+For "dev", if you use the given docker example this would be `http://frontend:5000/components/`.
 
 ## Using Renderer
 
@@ -82,6 +82,6 @@ Here is an example on how to use renderer in your templates:
 
 Some things to do, and ideas for potential features:
 
-* Release it
+* Release it (properly)
 
 Brought to you by [Fork Unstable Media GmbH](http://fork.de)
