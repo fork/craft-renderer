@@ -20,10 +20,6 @@ use GuzzleHttp\Client;
 /**
  * Render Service
  *
- * All of your plugin’s business logic should go in services, including saving data,
- * retrieving data, etc. They provide APIs that your controllers, template variables,
- * and other plugins can interact with.
- *
  * https://craftcms.com/docs/plugins/services
  *
  * @author    Fork Unstable Media GmbH
@@ -36,21 +32,30 @@ class Render extends Component
     // =========================================================================
 
     /**
-     * This function can literally be anything you want, and you can have as many service
-     * functions as you want
+     * Post json data to pattern lib and return html in template
      *
      * From any other plugin file, call it like this:
      *
      *     Renderer::$plugin->render->render()
      *
+     * @param $data
+     * @param string $componentType 'organisms'|'molecules' the type of component to render
+     * @param $template
      * @return mixed
      */
-    public function render($template, $data)
+    public function render($data, $componentType = 'organisms', $template = null)
     {
+        // set template name by matrix block handle if not provided
+        if (!$template && !empty($data['type'])) {
+            $template = $data['type'];
+        }
+
+        // if data is no array but e.g. an matrix block, get its fields
         if ($data instanceof Element) {
             $data = $data->getFieldValues();
         }
 
+        // get the patter lib url from settings (depending on craft environment)
         $env = Craft::$app->config->env;
         $pluginSettings = Renderer::$plugin->getSettings();
         $urls = $pluginSettings->patternLibUrls;
@@ -64,8 +69,7 @@ class Render extends Component
 
         $baseUrl = reset($envUrls);
 
-        // TODO: molecules too...
-        $url = "$baseUrl/organisms/$template/$template.html";
+        $url = "$baseUrl/$componentType/$template/$template.html";
 
         $client = new Client();
         try {

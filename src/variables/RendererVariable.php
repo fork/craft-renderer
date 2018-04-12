@@ -33,21 +33,21 @@ class RendererVariable
     // =========================================================================
 
     /**
-     * Whatever you want to output to a Twig template can go into a Variable method.
-     * You can have as many variable functions as you want.  From any Twig template,
-     * call it like this:
+     * Render a content module with given data/object (template will be guessed from matrix block type handle)
      *
-     *     {{ craft.renderer.render }}
+     *     {{ craft.renderer.render($mymodule) }}
      *
-     * Or, if your variable requires parameters from Twig:
+     * If you need to specify a template name:
      *
-     *     {{ craft.renderer.render(twigValue) }}
+     *     {{ craft.renderer.render($mymodule, 'organisms', 'quote') }}
      *
-     * @param null $optional
+     * @param $data
+     * @param string $componentType 'organisms'|'molecules' the type of component to render
+     * @param null $template optional template name (otherwise template will be guessed from matrix block type handle)
      * @return string
      */
-    public function render($template, $data)
+    public function render($data, $componentType = 'organisms', $template = null)
     {
-        return Template::raw(Renderer::$plugin->render->render($template, $data));
+        return Template::raw(Renderer::$plugin->render->render($data, $componentType, $template));
     }
 }
