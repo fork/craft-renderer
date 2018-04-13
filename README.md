@@ -12,6 +12,18 @@ You should include this as a git submodule in your project (in this case in the 
 For use with Docker here is an example for docker-compose.yml:
 
 ```
+version: '3'
+services:
+  mycraftinstance:
+    ...
+    links:
+      - "frontend:frontend"
+      - ...
+    depends_on:
+      - frontend
+      - ...
+    ...      
+
   frontend:
     image: "keymetrics/pm2:8-alpine"
     working_dir: /home/node/app
