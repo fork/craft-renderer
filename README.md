@@ -64,6 +64,43 @@ These could be implemented in Craft as Matrix Blocks for example, but any data c
 Go to the Plugin settings (http://mysite.com/admin/settings/plugins/renderer) and define the Urls to the Pattern Library (based on craft environment).
 For "dev", if you use the given docker example this would be `http://frontend:5000/components/`.
 
+### Events
+
+To modify the data being sent, there is an "beforeExtractData" event. You can implement it in your custom plugin init method like this:
+
+```
+// Modify rendering data
+Event::on(
+    Render::class,
+    Render::EVENT_BEFORE_EXTRACT_DATA,
+    function (RenderEvent $event) {
+        if (!empty($event->renderData['reference'])) {
+            $entry = $event->renderData->reference->one();
+
+            $returnFields = [];
+            $fields = $entry->getFieldValues();
+            foreach ($fields as $name => $field) {
+                if ($field instanceof \craft\redactor\FieldData) {
+                    $returnFields[$name] = $field->getRawContent();
+                } elseif ($field instanceof \typedlinkfield\models\Link) {
+                    $returnFields[$name] = [
+                        'url' => $field->getUrl(),
+                        'text' => $field->getText(),
+                        'target' => $field->getTarget(),
+                    ];
+                } elseif ($field instanceof \craft\elements\db\AssetQuery) {
+                    $returnFields[$name] = $field->one()->getUrl();
+                } else {
+                    $returnFields[$name] = $field;
+                }
+            }
+
+            $event->renderData = $returnFields;
+        }
+    }
+);
+```
+
 ## Using Renderer
 
 Here is an example on how to use renderer in your templates:

@@ -11,11 +11,13 @@
 namespace fork\renderer\services;
 
 use craft\base\Element;
+use fork\renderer\events\RenderEvent;
 use fork\renderer\Renderer;
 
 use Craft;
 use craft\base\Component;
 use GuzzleHttp\Client;
+use yii\base\Event;
 
 /**
  * Render Service
@@ -28,6 +30,9 @@ use GuzzleHttp\Client;
  */
 class Render extends Component
 {
+
+    const EVENT_BEFORE_EXTRACT_DATA = 'beforeExtractData';
+
     // Public Methods
     // =========================================================================
 
@@ -98,6 +103,16 @@ class Render extends Component
      * @return array
      */
     private function getData($data) {
+
+        // Fire a 'beforeExtractData' event
+        if ($this->hasEventHandlers(self::EVENT_BEFORE_EXTRACT_DATA)) {
+            $event = new RenderEvent([
+                'renderData' => $data,
+            ]);
+            $this->trigger(self::EVENT_BEFORE_EXTRACT_DATA, $event);
+            $data = $event->renderData;
+        }
+
         // if data is no array but e.g. an matrix block, get its fields
         if ($data instanceof Element) {
             $data = $data->getFieldValues();

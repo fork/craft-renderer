@@ -61,6 +61,6 @@ class RendererVariable
      */
     public function dump($data)
     {
-        return Template::raw('<pre>' . Renderer::$plugin->render->dump($data) . '</pre>');
+        return Template::raw('<pre>' . htmlentities(Renderer::$plugin->render->dump($data)) . '</pre>');
     }
 }
