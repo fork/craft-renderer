@@ -17,6 +17,7 @@ use fork\renderer\Renderer;
 use Craft;
 use craft\base\Component;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 use yii\base\Event;
 
 /**
@@ -77,9 +78,11 @@ class Render extends Component
         $client = new Client();
         try {
             return $client->post($url, ['json' => $data])->getBody();
-        } catch (\Exception $e) {
-            Craft::error($e->getMessage(), 'renderer');
-            return '';
+        } catch (RequestException $e) {
+            $errorResponse = $e->getResponse()->getBody()->getContents();
+            Craft::error($errorResponse, 'renderer');
+
+            return Craft::$app->config->env == 'dev' ? $errorResponse : '';
         }
     }
 
