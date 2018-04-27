@@ -2,7 +2,7 @@
     "name": "fork/renderer",
     "description": "Render html content from the fork ui pattern lib within templates (via json POST request)",
     "type": "craft-plugin",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "keywords": [
         "craft",
         "cms",

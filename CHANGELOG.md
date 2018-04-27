@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.0.5 - 2018-04-27
+### Fixed
+- logging if no response is set
+
 ## 1.0.4 - 2018-04-25
 ### Added
 - logging (and output in dev mode) for complete error response

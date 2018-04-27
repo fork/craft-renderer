@@ -79,7 +79,8 @@ class Render extends Component
         try {
             return $client->post($url, ['json' => $data])->getBody();
         } catch (RequestException $e) {
-            $errorResponse = $e->getResponse()->getBody()->getContents();
+            $response = $e->getResponse();
+            $errorResponse = $response ? $response->getBody()->getContents() : $e->getMessage();
             Craft::error($errorResponse, 'renderer');
 
             return Craft::$app->config->env == 'dev' ? $errorResponse : '';
