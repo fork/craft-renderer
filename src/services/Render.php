@@ -59,19 +59,23 @@ class Render extends Component
         // extract data
         $data = $this->getData($data);
 
-        // get the patter lib url from settings (depending on craft environment)
-        $env = Craft::$app->config->env;
-        $pluginSettings = Renderer::$plugin->getSettings();
-        $urls = $pluginSettings->patternLibUrls;
+        // get the pattern lib url from .env config or plugin settings (depending on craft environment)
+        if (getenv('PATTERNLIB_URL')) {
+            $baseUrl = getenv('PATTERNLIB_URL');
+        } else {
+            $env = Craft::$app->config->env;
+            $pluginSettings = Renderer::$plugin->getSettings();
+            $urls = $pluginSettings->patternLibUrls;
 
-        $envUrls = [];
-        foreach ($urls as $url) {
-            if ($env == $url[0]) {
-                $envUrls[] = $url[1];
+            $envUrls = [];
+            foreach ($urls as $url) {
+                if ($env == $url[0]) {
+                    $envUrls[] = $url[1];
+                }
             }
-        }
 
-        $baseUrl = reset($envUrls);
+            $baseUrl = reset($envUrls);
+        }
 
         $url = "$baseUrl/$componentType/$template/$template.html";
 
