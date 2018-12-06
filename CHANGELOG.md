@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.0.7 - 2018-12-06
+### Added
+- FORK Logo!
+- updated pm2 docker image (and remove apk yarn, is already installed...)
+- updated README regarding "PATTERNLIB_URL" setting in .env file
+
 ## 1.0.6 - 2018-05-14
 ### Added
 - allow setting pattern lib url via .env setting

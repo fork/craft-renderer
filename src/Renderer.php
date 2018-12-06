@@ -122,14 +122,14 @@ class Renderer extends Plugin
  *
  * http://www.yiiframework.com/doc-2.0/guide-runtime-logging.html
  */
-        Craft::info(
-            Craft::t(
-                'renderer',
-                '{name} plugin loaded',
-                ['name' => $this->name]
-            ),
-            __METHOD__
-        );
+//        Craft::info(
+//            Craft::t(
+//                'renderer',
+//                '{name} plugin loaded',
+//                ['name' => $this->name]
+//            ),
+//            __METHOD__
+//        );
     }
 
     // Protected Methods

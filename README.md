@@ -25,13 +25,13 @@ services:
     ...      
 
   frontend:
-    image: "keymetrics/pm2:8-alpine"
+    image: "keymetrics/pm2:10-alpine"
     working_dir: /home/node/app
     ports:
       - 5000:5000
     volumes:
       - ./frontend/:/home/node/app
-    command: sh -c 'apk --update add yarn && yarn && pm2-runtime start pm2.json'
+    command: sh -c 'yarn && pm2-runtime start pm2.json'
 ```
 
 
@@ -63,6 +63,8 @@ These could be implemented in Craft as Matrix Blocks for example, but any data c
 
 Go to the Plugin settings (http://mysite.com/admin/settings/plugins/renderer) and define the Urls to the Pattern Library (based on craft environment).
 For "dev", if you use the given docker example this would be `http://frontend:5000/components/`.
+You can also set/override this setting in your site/.env file like this:
+`PATTERNLIB_URL="http://localhost:5001/components/"`
 
 ### Events
 
